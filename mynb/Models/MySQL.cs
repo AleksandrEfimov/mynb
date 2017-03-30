@@ -21,14 +21,13 @@ namespace mynb.Models
             try
             {
                 error = "";
-                query = 
+                query = "OPEN CONNECTION TO MySQL";
                 con = new MySqlConnection(
                     WebConfigurationManager.ConnectionStrings["conn"].ConnectionString);
                 con.Open();
             } catch (Exception ex)
             {
                 error = ex.Message;
-                query = "OPEN CONNECTION TO MySQL";
                 con = null;
             }
 
@@ -39,14 +38,18 @@ namespace mynb.Models
             if (IsError()) return null;
             try
             {
+                query = myquery;
                 DataTable table = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(myquery, con);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 table.Load(reader);
                 return table;
             }
-            catch
-            { }
+            catch(Exception ex)
+            {
+                error = ex.Message;
+                return null;
+            }
         }
         static public bool IsError()
         {
@@ -54,6 +57,10 @@ namespace mynb.Models
             return error != "";
         }
 
+        static public string addSlashes(string text)
+        {
+            return text.Replace("\'", "\\\'");
+        }
 
     }
 }

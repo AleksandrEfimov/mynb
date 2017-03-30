@@ -10,10 +10,15 @@ namespace mynb.Controllers
     public class storyController : Controller
     {
         public ActionResult ErrorActionResult;
+        private Story story;
+        public storyController()
+            {
+               story = new Story(); 
+            }
         // GET: story
         public ActionResult Index()
         {
-            Story story = new Story();
+            
             if (IsError()) return ErrorActionResult;
 
             return View("number", story);
@@ -23,9 +28,9 @@ namespace mynb.Controllers
 
         public ActionResult random()
         {
-            Story story = new Story();
-            if (IsError()) return ErrorActionResult;
+           
             story.Random();
+            if (IsError()) return ErrorActionResult;
             return View("number", story);
         }
 
@@ -38,8 +43,12 @@ namespace mynb.Controllers
         // показывает одну историю/уже две
         public ActionResult number()
         {
+            
+            string id = (RouteData.Values["id"] ?? "").ToString();
+            if (id == "")
+                return Redirect("/page");
+            story.Number(id);
             if (IsError()) return ErrorActionResult;
-            Story story = new Story();
             return View(story);
         }
 
@@ -48,6 +57,13 @@ namespace mynb.Controllers
             if (MySQL.IsError())
             {
                 ViewBag.error = MySQL.error;
+                ViewBag.query = MySQL.query;
+                ErrorActionResult = View("~/Views/Error.cshtml");
+                return true;
+            }
+            if (story.IsError())
+            {
+                ViewBag.error = "Story not found";
                 ViewBag.query = MySQL.query;
                 ErrorActionResult = View("~/Views/Error.cshtml");
                 return true;
