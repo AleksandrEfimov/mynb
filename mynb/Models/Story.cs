@@ -23,10 +23,38 @@ namespace mynb.Models
         public string email { get; private set; }
         public string ename { get; private set; }
         public string post_date  { get; private set; }
+
+        public Story[] list { get; private set; }
+
         public bool error;
         public Story()
         {
             error = false;
+        }
+
+        // ВНИМАНИЕ! БДИ SQL-инъекции
+        public void GenerateList(string mylimit)
+        {
+            int limit;
+            try
+            {
+                limit = int.Parse(mylimit);
+            }
+            catch
+            {
+                limit = 10;
+            }
+            DataTable table = MySQL.Select(
+                        @"SELECT id, title, story, email, post_date
+                        FROM story 
+                        ORDER BY post_date DESC 
+                        LIMIT " + limit);
+            list = new Story[table.Rows.Count];
+            for (int j = 0; j < list.Length; j++)
+            {
+                list[j] = new Story();
+                list[j].ExtractRow(table, j);
+            }
         }
 
         public void Add()
@@ -89,6 +117,8 @@ namespace mynb.Models
         {
             return error;
         }
+
+        
     }
 
     

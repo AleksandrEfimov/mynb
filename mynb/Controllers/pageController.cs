@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mynb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace mynb.Controllers
         // GET: page
         public ActionResult Index()
         {
-            return View();
+            Story story = new Story();
+            story.GenerateList("4");
+            return View(story);
         }
     }
 }

@@ -1,7 +1,19 @@
-﻿
+﻿@model mynb.Models.Story
+
+
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@foreach (var x in Model.list)
+{
+    <h2>#@Html.ActionLink(x.id, "number", "story",
+        new {id = x.id },
+        new { @class = "t1" }).&nbsp; @x.title</h2>
+    <tt>@x.post_date</tt>
+    <p>@x.story</p>
+    <small>Posted by <i>@x.ename</i></small>
+    <hr/>
+}
 
