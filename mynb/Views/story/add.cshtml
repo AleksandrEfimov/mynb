@@ -1,7 +1,22 @@
-﻿
-@{
-    ViewBag.Title = "add";
-}
+﻿@model mynb.Models.Story
 
-<h2>add</h2>
+
+<h2>Добавить новую историю</h2>
+@using(Html.BeginForm())
+{
+    <p>
+        Название истории:
+        @Html.TextBox("title", Model.title)
+    </p>
+    <p>
+        Текст истории:
+        @Html.TextArea("story", Model.story)
+    </p>
+    <p>
+        Адрес электропочты:
+        @Html.TextBox("email", Model.email)
+
+    </p>
+    <input type="submit" value="Отправить" />
+}
 

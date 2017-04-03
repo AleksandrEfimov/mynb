@@ -18,18 +18,18 @@ namespace mynb.Models
     {
 
         public string id { get; private set; }
-        public string title { get; private set; }
-        public string story { get; private set; }
-        public string email { get; private set; }
+        public string title { get; set; }
+        public string story { get; set; }
+        public string email { get; set; }
         public string ename { get; private set; }
         public string post_date  { get; private set; }
 
         public Story[] list { get; private set; }
 
-        public bool error;
+        public string error { get; private set; }
         public Story()
         {
-            error = false;
+            error = "";
         }
 
         // ВНИМАНИЕ! БДИ SQL-инъекции
@@ -59,6 +59,18 @@ namespace mynb.Models
 
         public void Add()
         {
+            long id = MySQL.Insert(
+                @"INSERT INTO story (title, story, email, post_date)
+                VALUES ('" + MySQL.addSlashes(title) +
+                         "', '" + MySQL.addSlashes(story) +
+                         "', '" + MySQL.addSlashes(email) +
+                         "', NOW())");
+            if (id == -1)
+            {
+                error = "Error inserting record to database";
+                return;
+            }
+            this.id = id.ToString();
 
         }
 
@@ -96,7 +108,15 @@ namespace mynb.Models
                 title = table.Rows[nr]["title"].ToString();
                 story = table.Rows[nr]["story"].ToString();
                 email = table.Rows[nr]["email"].ToString();
-                ename = email.Substring(0, email.IndexOf('@'));
+                int pos = email.IndexOf('@');
+                    if ( pos < 0)
+                    {
+                        ename = email;
+                    }
+                    else
+                    {
+                        ename = email.Substring(0, pos);
+                    }
                 post_date = ((DateTime)table.Rows[nr]["post_date"]).ToString("yyyy-MM-dd"); ;
 
             }
@@ -108,14 +128,14 @@ namespace mynb.Models
                 email = "";
                 ename = "";
                 post_date = "";
-                error = true;
+                error = "Record not found";
                 return;
             }
         }
 
         public bool IsError()
         {
-            return error;
+            return error != "";
         }
 
         

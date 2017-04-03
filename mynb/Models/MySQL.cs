@@ -40,7 +40,7 @@ namespace mynb.Models
             {
                 query = myquery;
                 DataTable table = new DataTable();
-                MySqlCommand cmd = new MySqlCommand(myquery, con);
+                MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 table.Load(reader);
                 return table;
@@ -51,6 +51,24 @@ namespace mynb.Models
                 return null;
             }
         }
+        static public long Insert(string myquery)
+        {
+            
+            try
+            {
+                query = myquery;
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                
+                return cmd.LastInsertedId;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return -1;
+            }
+        }
+
         static public bool IsError()
         {
             

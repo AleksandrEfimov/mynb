@@ -34,11 +34,25 @@ namespace mynb.Controllers
             return View("number", story);
         }
 
+        [HttpGet]
         public ActionResult add()
         {
+            story.title = "";
+            story.story = "";
+            story.email = "";
             if (IsError()) return ErrorActionResult;
-            return View();
+            return View(story);
         }
+        [HttpPost]
+        public ActionResult add(Story post)
+        {
+            story = post;
+            story.Add();
+            if (IsError()) return ErrorActionResult;
+            return Redirect("/story/number/"+story.id);
+        }
+
+
 
         // показывает одну историю/уже две
         public ActionResult number()
@@ -63,7 +77,7 @@ namespace mynb.Controllers
             }
             if (story.IsError())
             {
-                ViewBag.error = "Story not found";
+                ViewBag.error = story.error;
                 ViewBag.query = MySQL.query;
                 ErrorActionResult = View("~/Views/Error.cshtml");
                 return true;
