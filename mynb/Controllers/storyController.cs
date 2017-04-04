@@ -46,6 +46,8 @@ namespace mynb.Controllers
         [HttpPost]
         public ActionResult add(Story post)
         {
+            if (!ModelState.IsValid)
+                return View(post);
             story = post;
             story.Add();
             if (IsError()) return ErrorActionResult;

@@ -16,3 +16,20 @@ textarea {
     max-width: 280px;
 }
 
+
+#header,
+
+#container,
+
+#footer {
+    clear:both;
+    width: 960px;
+    margin: 0;
+}
+
+.block {
+    clear: both;
+}
+#container {
+    min-height: 100%;
+}

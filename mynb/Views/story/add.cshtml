@@ -2,21 +2,46 @@
 
 
 <h2>Добавить новую историю</h2>
-@using(Html.BeginForm())
-{
-    <p>
-        Название истории:
-        @Html.TextBox("title", Model.title)
-    </p>
-    <p>
-        Текст истории:
-        @Html.TextArea("story", Model.story)
-    </p>
-    <p>
-        Адрес электропочты:
-        @Html.TextBox("email", Model.email)
 
-    </p>
-    <input type="submit" value="Отправить" />
+@using (Html.BeginForm())
+{
+    
+    <div class="block"></div>
+    <div class="col-lg-2 block">
+        Название истории:
+    </div>
+    <div class="col-lg-6">
+        @Html.TextBox("title", Model.title, new {@class="form-control" })
+    </div>
+    <div class="col-lg-4"> <mark>@Html.ValidationMessage("title")</mark> </div>
+
+
+    
+    <div class="col-lg-2 block">
+        Текст истории:
+    </div>
+    <div class="col-lg-6">
+        @Html.TextArea("story", Model.story, new { @class = "form-control", @rows = "10" })
+    </div>
+    <div class="col-lg-4"> <mark>@Html.ValidationMessage("story")</mark> </div>
+
+
+    
+    <div class="col-lg-2 block">
+        Адрес электропочты:
+    </div>
+    <div class="col-lg-6">
+         @Html.TextBox("email", Model.email, new { @class = "form-control" })
+    </div>
+    <div class="col-lg-4"> <mark>@Html.ValidationMessage("email")</mark> </div>
+
+
+
+    
+    <div class="col-lg-4 block"> </div>
+    <div class="col-lg-4">
+         <input type="submit" value="Отправить" class="btn lg btn-success" />
+    </div>
+    <div class="col-lg-4"> </div>
 }
 

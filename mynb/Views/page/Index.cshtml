@@ -8,12 +8,12 @@
 
 @foreach (var x in Model.list)
 {
-    <h2>#@Html.ActionLink(x.id, "number", "story",
+    <h2>@Html.ActionLink(x.id, "number", "story",
         new {id = x.id },
-        new { @class = "t1" }).&nbsp; @x.title</h2>
-    <tt>@x.post_date</tt>
+        new { @class = "label label-info" })&nbsp; @x.title</h2>
+    <tt class="alert-warning">@x.post_date</tt>
     <p>@x.story</p>
-    <small>Posted by <i>@x.ename</i></small>
+    <small class="alert-success">Posted by <i>@x.ename</i></small>
     <hr/>
 }
 

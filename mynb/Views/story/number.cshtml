@@ -4,11 +4,9 @@
     ViewBag.Title = "number";
 }
 
-<h2>#@Model.id. @Model.title</h2>
-<tt>@Model.post_date</tt>
+<h2><span class="label label-info" >@Model.id.</span> @Model.title</h2>
+<tt class="alert-warning">@Model.post_date</tt>
 <p>@Model.story</p>
-<small>Posted by <i>@Model.ename</i></small>
-
-
+<small class="alert-success">Posted by <i>@Model.ename</i></small>
 
 

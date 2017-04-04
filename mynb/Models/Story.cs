@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-
+using System.ComponentModel.DataAnnotations;
 // МОДЕЛЬ
 namespace mynb.Models
 {
@@ -17,10 +17,21 @@ namespace mynb.Models
     public class Story 
     {
 
-        public string id { get; private set; }
+        
+        [Required(ErrorMessage = "Введите заголовок")]
         public string title { get; set; }
+        [Required(ErrorMessage = "Введите текст истории")]
         public string story { get; set; }
+        [Required(ErrorMessage = "Введите электропочту")]
+        [RegularExpression(
+            @"^([a-z0-9_-]+\.)*[a-z0-9_-]+@"+
+            @"([a-z0-9_-]+\.)+[a-z]{2,6}", //не работает
+            //@"[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}",
+            ErrorMessage = "Адрес эл.почты введён не корректно")]
+
         public string email { get; set; }
+
+        public string id { get; private set; }
         public string ename { get; private set; }
         public string post_date  { get; private set; }
 
@@ -59,6 +70,11 @@ namespace mynb.Models
 
         public void Add()
         {
+            if ( (email ?? "").IndexOf('@') == -1 )
+            {
+                error = "Incorrect email address";
+                return;
+            }
             long id = MySQL.Insert(
                 @"INSERT INTO story (title, story, email, post_date)
                 VALUES ('" + MySQL.addSlashes(title) +
