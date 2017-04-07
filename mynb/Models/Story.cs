@@ -38,9 +38,11 @@ namespace mynb.Models
         public Story[] list { get; private set; }
 
         public string error { get; private set; }
-        public Story()
+        private MySQL sql;
+        public Story(MySQL sql)
         {
             error = "";
+            this.sql = sql;
         }
 
         // ВНИМАНИЕ! БДИ SQL-инъекции
@@ -55,16 +57,23 @@ namespace mynb.Models
             {
                 limit = 10;
             }
-            DataTable table = MySQL.Select(
+            DataTable table = sql.Select(
                         @"SELECT id, title, story, email, post_date
                         FROM story 
                         ORDER BY post_date DESC 
                         LIMIT " + limit);
-            list = new Story[table.Rows.Count];
-            for (int j = 0; j < list.Length; j++)
+            try
             {
-                list[j] = new Story();
-                list[j].ExtractRow(table, j);
+                list = new Story[table.Rows.Count];
+                for (int j = 0; j < list.Length; j++)
+                {
+                    list[j] = new Story(sql);
+                    list[j].ExtractRow(table, j);
+                }
+            }
+            catch(Exception ex)
+            {
+                error = "GenereteList does not return any rows: "+ex.Message;
             }
         }
 
@@ -75,11 +84,11 @@ namespace mynb.Models
                 error = "Incorrect email address";
                 return;
             }
-            long id = MySQL.Insert(
+            long id = sql.Insert(
                 @"INSERT INTO story (title, story, email, post_date)
-                VALUES ('" + MySQL.addSlashes(title) +
-                         "', '" + MySQL.addSlashes(story) +
-                         "', '" + MySQL.addSlashes(email) +
+                VALUES ('" + sql.addSlashes(title) +
+                         "', '" + sql.addSlashes(story) +
+                         "', '" + sql.addSlashes(email) +
                          "', NOW())");
             if (id == -1)
             {
@@ -92,7 +101,7 @@ namespace mynb.Models
 
         public void Random()
         {
-            DataTable table = MySQL.Select(
+            DataTable table = sql.Select(
                     @"SELECT id, title, story, email, post_date
                         FROM story 
                         ORDER BY RAND() 
@@ -103,10 +112,10 @@ namespace mynb.Models
 
         public void Number(string id)
         {
-            DataTable table = MySQL.Select(
+            DataTable table = sql.Select(
                    @"SELECT id, title, story, email, post_date 
                             FROM story 
-                            WHERE id = '" + MySQL.addSlashes(id) + "'");
+                            WHERE id = '" + sql.addSlashes(id) + "'");
             ExtractRow(table);
 
         }

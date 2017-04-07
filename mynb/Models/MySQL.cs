@@ -8,13 +8,13 @@ using System.Web.Configuration;
 
 namespace mynb.Models
 {
-    static public class MySQL
+     public class MySQL
     {
-        static private MySqlConnection con;
-        static public string error { get; private set; }
-        static public string query { get; private set; }
+        private MySqlConnection con;
+        public string error { get; private set; }
+        public string query { get; private set; }
 
-        static MySQL()
+        public MySQL()
         {   // строка подключения к БД
             // con = new MySqlConnection("server=localhost; UserID=root;Password=mysql;database=STORY;Charset=utf8");
             //создаем подключение
@@ -30,10 +30,17 @@ namespace mynb.Models
                 error = ex.Message;
                 con = null;
             }
-
-            
         }
-        static public DataTable Select(string myquery)
+        ~MySQL()
+        {
+            try
+            {
+                con.Close();
+            }
+            catch
+            { }
+        }
+        public DataTable Select(string myquery)
         {
             if (IsError()) return null;
             try
@@ -51,7 +58,7 @@ namespace mynb.Models
                 return null;
             }
         }
-        static public long Insert(string myquery)
+        public long Insert(string myquery)
         {
             
             try
@@ -69,13 +76,13 @@ namespace mynb.Models
             }
         }
 
-        static public bool IsError()
+        public bool IsError()
         {
             
             return error != "";
         }
 
-        static public string addSlashes(string text)
+        public string addSlashes(string text)
         {
             return text.Replace("\'", "\\\'");
         }

@@ -9,11 +9,13 @@ namespace mynb.Controllers
 {
     public class pageController : Controller
     {
+        private MySQL sql;
         // GET: page
         public ActionResult Index()
         {
-            Story story = new Story();
-            story.GenerateList("4");
+            sql = new MySQL();
+            Story story = new Story(sql);
+            story.GenerateList("10");
             return View(story);
         }
     }

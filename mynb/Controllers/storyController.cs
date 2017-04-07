@@ -8,12 +8,16 @@ using System.Web.Mvc;
 namespace mynb.Controllers
 {
     public class storyController : Controller
+
     {
         public ActionResult ErrorActionResult;
         private Story story;
+        private MySQL sql;
         public storyController()
             {
-               story = new Story(); 
+                sql = new MySQL();
+                story = new Story(sql);
+            
             }
         // GET: story
         public ActionResult Index()
@@ -70,17 +74,17 @@ namespace mynb.Controllers
 
         public bool IsError()
         {
-            if (MySQL.IsError())
+            if (sql.IsError())
             {
-                ViewBag.error = MySQL.error;
-                ViewBag.query = MySQL.query;
+                ViewBag.error = sql.error;
+                ViewBag.query = sql.query;
                 ErrorActionResult = View("~/Views/Error.cshtml");
                 return true;
             }
             if (story.IsError())
             {
                 ViewBag.error = story.error;
-                ViewBag.query = MySQL.query;
+                ViewBag.query = sql.query;
                 ErrorActionResult = View("~/Views/Error.cshtml");
                 return true;
             }
