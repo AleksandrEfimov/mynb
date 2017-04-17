@@ -4,31 +4,22 @@ using System.ComponentModel.DataAnnotations;
 // МОДЕЛЬ
 namespace mynb.Models
 {
-    class ArStory
-    {
-         internal string[,] stor_story = new string[,]
-            { { "В чем разница между Array() и ArrayList()","Array фиксирован по длине и хранит данные одного типа, ArrayList - динамичен по размеру и разные типы" },
-              { "Разница между const и readonly переменных в C#","const - значение определяется при инициализации,  дальнейшем его изменить не возможно, readonly - значение можно изменить во время работы приложения через переменную или конструктор" },
-              { "Различия finalize() и finally","1е - метод использован для сборщика мусора, 2е - выполняет код независимо от наличия исключения в блоках try{} Catch{}" }
-            };
-        public ArStory() { }
-
-    }
+    
     public class Story 
     {
 
         
         [Required(ErrorMessage = "Введите заголовок")]
-        public string title { get; set; }
+        public string title { get;  set; }
         [Required(ErrorMessage = "Введите текст истории")]
         public string story { get; set; }
+
         [Required(ErrorMessage = "Введите электропочту")]
         [RegularExpression(
             @"^([a-z0-9_-]+\.)*[a-z0-9_-]+@"+
-            @"([a-z0-9_-]+\.)+[a-z]{2,6}", //не работает
+            @"([a-z0-9_-]+\.)+[a-z]{2,6}", 
             //@"[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}",
             ErrorMessage = "Адрес эл.почты введён не корректно")]
-
         public string email { get; set; }
 
         public string id { get; private set; }
@@ -43,6 +34,11 @@ namespace mynb.Models
         {
             error = "";
             this.sql = sql;
+        }
+        // тестируем инициализацию Story post
+        public Story()
+        {
+            
         }
 
         // ВНИМАНИЕ! БДИ SQL-инъекции
@@ -117,7 +113,6 @@ namespace mynb.Models
                             FROM story 
                             WHERE id = '" + sql.addSlashes(id) + "'");
             ExtractRow(table);
-
         }
 
         private void ExtractRow(DataTable table)

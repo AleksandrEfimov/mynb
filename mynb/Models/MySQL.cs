@@ -82,6 +82,7 @@ namespace mynb.Models
             return error != "";
         }
 
+        // защита от sql инъекций
         public string addSlashes(string text)
         {
             return text.Replace("\'", "\\\'");

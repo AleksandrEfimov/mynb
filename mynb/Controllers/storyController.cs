@@ -11,20 +11,22 @@ namespace mynb.Controllers
 
     {
         public ActionResult ErrorActionResult;
-        private Story story;
+        private Story story, post;
         private MySQL sql;
+
         public storyController()
             {
                 sql = new MySQL();
                 story = new Story(sql);
-            
+                // тестируем инициализацию Story post
             }
+
+
         // GET: story
         public ActionResult Index()
         {
             
             if (IsError()) return ErrorActionResult;
-
             return View("number", story);
 
         }
@@ -44,26 +46,36 @@ namespace mynb.Controllers
             story.title = "";
             story.story = "";
             story.email = "";
+           
             if (IsError()) return ErrorActionResult;
             return View(story);
         }
         [HttpPost]
-        public ActionResult add(Story post)
+        public ActionResult add(Story post )
         {
+            
             if (!ModelState.IsValid)
                 return View(post);
-            story = post;
+
+            //story = post;
+            story.title = post.title;
+            story.story = post.story;
+            story.email = post.email;
             story.Add();
             if (IsError()) return ErrorActionResult;
             return Redirect("/story/number/"+story.id);
+            
+            
         }
+
+
+
 
 
 
         // показывает одну историю/уже две
         public ActionResult number()
         {
-            
             string id = (RouteData.Values["id"] ?? "").ToString();
             if (id == "")
                 return Redirect("/page");
@@ -71,6 +83,9 @@ namespace mynb.Controllers
             if (IsError()) return ErrorActionResult;
             return View(story);
         }
+
+
+
 
         public bool IsError()
         {

@@ -19,7 +19,9 @@ textarea {
 
 #header,
 
-#container,
+#container{
+    background-color:olive;
+}
 
 #footer {
     clear:both;
