@@ -8,7 +8,6 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
-
 </head>
 @helper CurrentItem(string item)
 {
@@ -22,14 +21,14 @@
         <div class="col-lg-2"></div>
             <div class="col-lg-8">
                 <ul class="nav nav-pills">
-                    <li @CurrentItem("Index")  >     @Html.ActionLink("Свежие", "Index", "page", new { area = "" }, new { @class = "navbar-brand" })         </li>
+                    <li @CurrentItem("Index")  >     @Html.ActionLink("Свежие", "index", "page", new { area = "" }, new { @class = "navbar-brand" })         </li>
                     <li @CurrentItem("random") >     @Html.ActionLink("Случайная", "random", "story", new { area = "" }, new { @class = "navbar-brand" })    </li>
                     <li @CurrentItem("add")    >     @Html.ActionLink("Прислать", "add", "story", new { area = "" }, new { @class = "navbar-brand" })        </li>
-                    <li @CurrentItem("About")  >     @Html.ActionLink("Зачем всё?", "About", "About", new { area = "" }, new { @class = "navbar-brand" })    </li>
+                    <li @CurrentItem("About")  >     @Html.ActionLink("Зачем всё?", "about", "about", new { area = "" }, new { @class = "navbar-brand" })    </li>
+                    <li @CurrentItem("login")  >     @Html.ActionLink("Войти", "index", "admin", new { area = "" }, new { @class = "navbar-brand" })    </li>
                 </ul>
             </div>
         <div class="col-lg-2"></div>
-
     </div>
     <div id="container" class="col-lg-12">
         <div class="col-lg-2"></div>
@@ -40,7 +39,7 @@
 
     </div>
     <div id="footer" class="col-lg-12">
-        <hr />
+        
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <footer>

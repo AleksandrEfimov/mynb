@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -13,25 +13,23 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
 
 
 #header,
+#container,
 
-#container{
-    background-color:olive;
-}
 
 #footer {
     clear:both;
-    width: 960px;
+    width: 100%;
     margin: 0;
+    background-color:rebeccapurple;
+    max-height:100%;
+    padding-top: 0px;
 }
 
 .block {
     clear: both;
-}
-#container {
-    min-height: 100%;
 }

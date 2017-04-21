@@ -58,6 +58,28 @@ namespace mynb.Models
                 return null;
             }
         }
+
+        public string Scalar(string myquery)
+        {
+            if (IsError()) return null;
+            try
+            {
+                query = myquery;
+                DataTable table = new DataTable();
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                table.Load(reader);
+                if (table.Rows.Count == 0)
+                    return "";
+                return table.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return null;
+            }
+        }
+
         public long Insert(string myquery)
         {
             

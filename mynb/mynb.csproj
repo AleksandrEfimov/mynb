@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\adminController.cs" />
     <Compile Include="Controllers\pageController.cs" />
     <Compile Include="Controllers\storyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -152,6 +153,7 @@
     <Compile Include="Models\About.cs" />
     <Compile Include="Models\MySQL.cs" />
     <Compile Include="Models\Story.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +171,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Error.cshtml" />
     <Content Include="Views\Shared\_Design.cshtml" />
+    <Content Include="Views\admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
