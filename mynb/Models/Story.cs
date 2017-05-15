@@ -35,6 +35,40 @@ namespace mynb.Models
             error = "";
             this.sql = sql;
         }
+
+        public bool SelectWaitStory()
+        {
+             DataTable table = sql.Select(
+                   @"SELECT id, title, story, email, post_date 
+                            FROM story 
+                            WHERE status = 'wait'
+                            ORDER BY post_date ASC 
+                            LIMIT 1" );
+            if (table == null || table.Rows.Count == 0)
+                return false;
+            ExtractRow(table);
+            return true;
+        }
+
+        public void Approve( string id)
+        {
+            sql.Update(
+                  @"UPDATE story
+                    SET status = 'show' 
+                    WHERE id = '"+sql.addSlashes(id) + "' LIMIT 1");
+            
+        }
+
+        public void Decline(string id)
+        {
+            sql.Update(
+                @"UPDATE story
+                    SET status = 'drop' 
+                    WHERE id = '" + sql.addSlashes(id) + "' LIMIT 1");
+        }
+
+
+
         // тестируем инициализацию Story post
         public Story()
         {
@@ -56,6 +90,7 @@ namespace mynb.Models
             DataTable table = sql.Select(
                         @"SELECT id, title, story, email, post_date
                         FROM story 
+                        WHERE status = 'show'
                         ORDER BY post_date DESC 
                         LIMIT " + limit);
             try

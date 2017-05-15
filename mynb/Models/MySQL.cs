@@ -98,6 +98,21 @@ namespace mynb.Models
             }
         }
 
+        public long Update(string myquery)
+        {
+
+            try
+            {
+                query = myquery;
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return -1;
+            }
+        }
         public bool IsError()
         {
             

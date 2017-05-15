@@ -172,6 +172,7 @@
     <Content Include="Views\Error.cshtml" />
     <Content Include="Views\Shared\_Design.cshtml" />
     <Content Include="Views\admin\Index.cshtml" />
+    <Content Include="Views\admin\Checker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

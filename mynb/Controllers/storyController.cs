@@ -63,9 +63,7 @@ namespace mynb.Controllers
             story.email = post.email;
             story.Add();
             if (IsError()) return ErrorActionResult;
-            return Redirect("/story/number/"+story.id);
-            
-            
+            return Redirect("/story/number/"+story.id);    
         }
 
 
