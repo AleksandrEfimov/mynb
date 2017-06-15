@@ -7,8 +7,8 @@ namespace mynb.Models
 {
     public class About
     {
-        public readonly string Name = "Моя записная книжка";
-        public readonly string Text = "Пред вами сайт, он прост, он для заметок, один из миллионов. C# в вопросах и ответах. Моя цель - junior C# ASP.NET";
+        public readonly string Name = "Мой электронный блокнот для хороших заметок";
+        public readonly string Text = "Пред вами сайт, он прост. Проект учебный. Тематика C# в вопросах и ответах. Цель на 17й год - junior C#.";
         public About() { }
 
 

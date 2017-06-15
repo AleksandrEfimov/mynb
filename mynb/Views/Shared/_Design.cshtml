@@ -24,7 +24,7 @@
                     <li @CurrentItem("page/Index")  >     @Html.ActionLink("Свежие", "index", "page", new { area = "" }, new { @class = "navbar-brand" })         </li>
                     <li @CurrentItem("story/random") >     @Html.ActionLink("Случайная", "random", "story", new { area = "" }, new { @class = "navbar-brand" })    </li>
                     <li @CurrentItem("story/add")    >     @Html.ActionLink("Прислать", "add", "story", new { area = "" }, new { @class = "navbar-brand" })        </li>
-                    <li @CurrentItem("About/About")  >     @Html.ActionLink("Зачем всё?", "about", "about", new { area = "" }, new { @class = "navbar-brand" })    </li>
+                    <li @CurrentItem("About/About")  >     @Html.ActionLink("Контакты", "about", "about", new { area = "" }, new { @class = "navbar-brand" })    </li>
                     <li @CurrentItem("admin/Index")  >     @Html.ActionLink("Войти", "index", "admin", new { area = "" }, new { @class = "navbar-brand" })    </li>
                     @if (Session["admin"] == "1")
                     {
