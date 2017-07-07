@@ -1,0 +1,24 @@
+﻿@model mynb.Models.Story
+
+@{
+    ViewBag.Title = "Checker";
+}
+
+<h2>Проверка историй</h2>
+
+
+<h2><span class="label label-info">@Model.id.</span> @Model.title</h2>
+<tt class="alert-warning">@Model.post_date</tt>
+<p>@Model.story</p>
+<small class="alert-success">Posted by <i>@Model.email</i></small>
+
+
+<br />
+    <div class="col-lg-3 block"> </div>
+    <div class="col-lg-3">
+        @Html.ActionLink("Опубликовать", "approve", "admin", new { id = Model.id }, new { @class = "btn btn-success" })
+    </div>        
+    <div class="col-lg-3">
+         @Html.ActionLink("Удалить", "decline", "admin", new { id = Model.id }, new { @class = "btn btn-danger" })
+    </div>
+<div class="col-lg-3"></div>

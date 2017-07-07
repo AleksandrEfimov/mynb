@@ -36,17 +36,28 @@ CREATE TABLE IF NOT EXISTS `story` (
   `story` text,
   `email` varchar(255) DEFAULT NULL,
   `post_date` datetime DEFAULT NULL,
+  `status` enum('wait','show','drop') DEFAULT 'wait',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы story.story: ~4 rows (приблизительно)
+-- Дамп данных таблицы story.story: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `story` DISABLE KEYS */;
-INSERT IGNORE INTO `story` (`id`, `title`, `story`, `email`, `post_date`) VALUES
-	(1, 'Sad money', 'Money is the root all evil', 'sob@gmail.com', '2016-12-26 17:04:34'),
-	(2, 'Go', 'Money makes the world go round!', 'sobaka@gmail.com', '2016-12-26 17:07:29'),
-	(3, 'Who i am?', 'Ich bin wanderbar!', 'sob@sob.ru', '2017-03-30 10:14:57'),
-	(4, 'Where i\'am going?', 'Ich gehe zum Erfolg!', 'psy@na.ru', '2017-03-30 10:18:17');
 /*!40000 ALTER TABLE `story` ENABLE KEYS */;
+
+-- Дамп структуры для таблица story.user
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) DEFAULT NULL,
+  `passw` varchar(50) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы story.user: ~1 rows (приблизительно)
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT IGNORE INTO `user` (`id`, `login`, `passw`, `status`) VALUES
+	(1, 'admin', 'qwas', 1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

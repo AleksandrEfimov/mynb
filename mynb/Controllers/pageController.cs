@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace mynb.Controllers
-{
+{   // page which seing user when come in site
     public class pageController : Controller
     {
         private MySQL sql;
@@ -15,6 +15,7 @@ namespace mynb.Controllers
         {
             sql = new MySQL();
             Story story = new Story(sql);
+            // getting a list of 10 stories
             story.GenerateList("10");
             return View(story);
         }

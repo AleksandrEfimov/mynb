@@ -1,0 +1,45 @@
+﻿@model mynb.Models.User
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Авторизация</h2>
+@*<p>Status: @Model.status</p>
+<p>Session: @Session["admin"]</p>*@
+
+@if (@Session["admin"] == "1")
+{
+    <div class="col-lg-2 block"> </div>
+    <div class="col-lg-4">
+           @Html.ActionLink("Выйти", "logout", "admin", new { },  new { @class = "btn btn-danger" })
+    </div>
+
+}
+else
+{
+    using (Html.BeginForm("index", "admin"))
+    {
+        <div class="container">
+            <div class="col-lg-2">Логин:</div>
+            <div class="col-lg-4">    @Html.TextBox("login", Model.login, new { @class = "form-control" })   </div>
+            <div class="col-lg-6"><mark>@Html.ValidationMessage("login")</mark></div>
+        </div>
+        <div class="container">
+            <div class="col-lg-2">Пароль:</div>
+            <div class="col-lg-4">     @Html.Password("passw", Model.passw, new { @class = "form-control" })  </div>
+            <div class="col-lg-6"><mark>@Html.ValidationMessage("passw")</mark></div>
+        </div>
+        <div class="container">
+            <div class="col-lg-4 block"> </div>
+            <div class="col-lg-4">
+                <input type="submit" value="Вход" class="btn lg btn-primary" />
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    }
+}
+
+<p>Status: @Model.status</p>
+<p>Session: @Session["admin"]</p>
+

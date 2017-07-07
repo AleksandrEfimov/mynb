@@ -15,6 +15,7 @@ namespace mynb.Models
         [Required(ErrorMessage = "Введите пароль")]
         public string passw { get; set; }
 
+        // status implies the role
         public string status;
 
         public User(MySQL sql)
@@ -27,6 +28,7 @@ namespace mynb.Models
             sql = null;
             status = "";
         }
+        // checking status "login" in adminController. In case status equal "1" user is admin
         public void CheckLogin()
         {
             this.status = sql.Scalar(

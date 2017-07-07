@@ -1,0 +1,20 @@
+﻿@model mynb.Models.Story
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var x in Model.list)
+{
+    <h2>@Html.ActionLink(x.id, "number", "story", new {id = x.id },  new { @class = "label label-info, color=" })&nbsp; @x.title</h2>
+    
+    <tt class="alert-warning">@x.post_date</tt>
+    
+    <p>@x.story</p>
+
+    <small class="alert-success">Posted by <i>@x.ename</i></small>
+    <hr/>
+}
+

@@ -1,0 +1,12 @@
+﻿@model mynb.Models.Story
+
+@{
+    ViewBag.Title = "number";
+}
+
+<h2><span class="label label-info" >@Model.id.</span> @Model.title</h2>
+<tt class="alert-warning">@Model.post_date</tt>
+<p>@Model.story</p>
+<small class="alert-success">Posted by <i>@Model.ename</i></small>
+
+

@@ -9,6 +9,7 @@ namespace mynb.Models
     {
         public readonly string Name = "Мой электронный блокнот для хороших заметок";
         public readonly string Text = "Пред вами сайт, он прост. Проект учебный. Тематика C# в вопросах и ответах. Цель на 17й год - junior C#.";
+        public readonly string PhoneNumber = "925-01-234-56";
         public About() { }
 
 
